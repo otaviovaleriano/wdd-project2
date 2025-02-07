@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.module';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipes-list',
   standalone: false,
-  
+
   templateUrl: './recipes-list.component.html',
   styleUrl: './recipes-list.component.css'
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://www.averiecooks.com/wp-content/uploads/2021/01/garlicbutterchicken-5.jpg'),
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://www.averiecooks.com/wp-content/uploads/2021/01/garlicbutterchicken-5.jpg'),
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://www.averiecooks.com/wp-content/uploads/2021/01/garlicbutterchicken-5.jpg')
-  ];
+  recipes: Recipe[];
 
-  constructor() { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
   }
 
 }
